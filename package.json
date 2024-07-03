@@ -1,0 +1,30 @@
+{
+  "name": "test-frontend-gove",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "server": "json-server --watch api/db.json --port 5000"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.21",
+    "@mui/material": "^5.15.21",
+    "@mui/material-nextjs": "^5.15.11",
+    "@mui/x-data-grid": "^7.8.0",
+    "@tanstack/react-query": "^5.49.2",
+    "json-server": "^1.0.0-beta.1",
+    "next": "14.2.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4"
+  }
+}
