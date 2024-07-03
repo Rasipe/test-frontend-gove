@@ -108,6 +108,9 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
             required
             fullWidth
             variant={inputVariant}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(event) => handleChange(event, setName, setNameError)}
           />
         </Grid>
@@ -121,6 +124,9 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
             required
             fullWidth
             variant={inputVariant}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(event) => handleChange(event, setEmail, setEmailError)}
           />
         </Grid>
@@ -168,6 +174,9 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
             multiline
             rows={5}
             variant={inputVariant}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(event) => handleChange(event, setDescription, null)}
           />
         </Grid>
