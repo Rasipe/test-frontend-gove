@@ -1,5 +1,5 @@
 "use client"
-import { Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 
 import styles from "./page.module.css";
 import CityTable from "./components/CityTable";
@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function Home() {
   const [currentCity, setCurrentCity] = useState({})
 
-  const { data: cities, refetch: refetchCities } = useQuery({
+  const { data: cities, refetch: refetchCities, isLoading: isLoadingCities } = useQuery({
     queryFn: async () => await getAllCities()
   });
 
@@ -39,7 +39,10 @@ export default function Home() {
         Cadastro de Municipios
       </Typography>
       <CityForm currentCity={currentCity} id={currentCity.id} onResetData={() => setCurrentCity({})} onSaveData={saveCityMutation.mutate}></CityForm>
-      <CityTable cities={cities || []} onEditData={handleEditCity} onDeleteData={handleDeleteCity}></CityTable>
+      {
+        isLoadingCities ? <CircularProgress size={150} sx={{m: 5}}/>
+        : <CityTable cities={cities || []} onEditData={handleEditCity} onDeleteData={handleDeleteCity}></CityTable>
+      }
     </main>
   );
 }

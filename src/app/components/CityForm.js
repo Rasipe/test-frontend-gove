@@ -16,13 +16,12 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
   const [monthlyValue, setMonthlyValue] = useState("")
   const [monthlyValueError, setMonthlyValueError] = useState(null)
   const [description, setDescription] = useState("")
-  const [hasError, setError] = useState(null)
+  const [hasError, setError] = useState(true)
 
   const inputVariant = "outlined"
 
   const styles = {
     form: {
-      flexGrow: 1,
       width: "100%",
       background: "white",
       m: 5,
