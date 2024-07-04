@@ -1,7 +1,7 @@
 {
   "cities": [
     {
-      "name": "Reggae",
+      "name": "Reggae 1",
       "email": "Donavon.Koch20@hotmail.com",
       "phoneNumber": "(474) 753-1381 x396",
       "monthlyValue": 46,
@@ -391,14 +391,6 @@
       "monthlyValue": 24,
       "description": "inventore error expedita",
       "id": "49"
-    },
-    {
-      "name": "invoice",
-      "email": "Danyka_McClure66@gmail.com",
-      "phoneNumber": "268.482.6324",
-      "monthlyValue": 97,
-      "description": "libero voluptate voluptas",
-      "id": "50"
     }
   ]
 }

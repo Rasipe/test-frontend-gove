@@ -37,7 +37,7 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
     propSetter(event.target.value)
   }
 
-  const resetForm = () => {
+  const handleResetForm = () => {
     setName("")
     setEmail("")
     setPhone("")
@@ -52,7 +52,7 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
     onResetData()
   }
 
-  const submitForm = async (event) => {
+  const handleSubmitForm = async (event) => {
     event.preventDefault();
     const data = {
       ...currentCity,
@@ -64,7 +64,7 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
     }
 
     onSaveData(data)
-    resetForm();
+    handleResetForm();
   }
 
   useEffect(() => {
@@ -95,8 +95,8 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
       sx={styles.form}
       noValidate
       autoComplete="off"
-      onSubmit={submitForm}
-      onReset={resetForm}
+      onSubmit={handleSubmitForm}
+      onReset={handleResetForm}
     >
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -151,23 +151,26 @@ export default function CityForm({ currentCity, onSaveData, onResetData }) {
           />
         </Grid>
         <Grid item xs={8}>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="monthly-value">Valor mensal</InputLabel>
-            <OutlinedInput
-              type="number"
-              id="monthly-value"
-              label="Valor mensal"
-              value={monthlyValue}
-              error={monthlyValueError}
-              required
-              startAdornment={<InputAdornment position="start">R$</InputAdornment>}
-              onChange={(event) => handleChange(event, setMonthlyValue, setMonthlyValueError)}
-            />
-          </FormControl>
+        <TextField
+            id="input-monthly-value"
+            label="Valor pago mensal"
+            error={monthlyValueError}
+            value={monthlyValue}
+            type="number"
+            required
+            fullWidth
+            variant={inputVariant}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start"> R$ </InputAdornment>
+              ),
+            }}
+            onChange={(event) => handleChange(event, setMonthlyValue, setMonthlyValueError)}
+          />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            id="input-name"
+            id="input-description"
             label="Descrição"
             value={description}
             fullWidth

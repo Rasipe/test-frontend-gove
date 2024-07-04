@@ -4,12 +4,11 @@ import {
   IconButton, Paper, Box,
 } from "@mui/material";
 import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-import { deleteById } from '../services/apiService'
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CityTable({ cities, onEditData, onDeleteData }) {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [paginatedData, setPaginatedData] = useState([])
 
   const styles = {
@@ -23,14 +22,6 @@ export default function CityTable({ cities, onEditData, onDeleteData }) {
     }
   }
 
-  const deleteItem = async (id) => {
-    onDeleteData(id)
-  }
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -42,16 +33,22 @@ export default function CityTable({ cities, onEditData, onDeleteData }) {
     const paginated = cities.slice(start, end)
     setPaginatedData(paginated);
   }
+  
+  
+  const editData = (id) => {
+    window.scrollTo(0, 0)
+    onEditData(id)
+  }
 
   useEffect(paginate, [page, rowsPerPage, cities])
 
   return (
     <Box sx={styles.container}>
       <TableContainer component={Paper}>
-        <Table sx={styles.table} aria-label="simple table">
+        <Table sx={styles.table}>
           <TableHead>
             <TableRow>
-              <TableCell>id </TableCell>
+              <TableCell align="center">id </TableCell>
               <TableCell align="center">Municipio</TableCell>
               <TableCell align="center">Email</TableCell>
               <TableCell align="center">Telefone</TableCell>
@@ -61,20 +58,15 @@ export default function CityTable({ cities, onEditData, onDeleteData }) {
           </TableHead>
           <TableBody>
             {paginatedData.map((item) => (
-              <TableRow
-                key={item.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {item.id}
-                </TableCell>
+              <TableRow key={item.id}>
+                <TableCell align="center"> {item.id} </TableCell>
                 <TableCell align="center">{item.name}</TableCell>
                 <TableCell align="center">{item.email}</TableCell>
                 <TableCell align="center">{item.phoneNumber}</TableCell>
                 <TableCell align="center">{item.monthlyValue}</TableCell>
                 <TableCell align="center">
-                  <IconButton aria-label="edit" color="primary" onClick={() => onEditData(item.id)}> <EditIcon /> </IconButton >
-                  <IconButton aria-label="delete" color="error" onClick={() => deleteItem(item.id)}> <DeleteIcon /> </IconButton >
+                  <IconButton aria-label="edit" color="primary" onClick={() => editData(item.id)}> <EditIcon /> </IconButton >
+                  <IconButton aria-label="delete" color="error" onClick={() => onDeleteData(item.id)}> <DeleteIcon /> </IconButton >
                 </TableCell>
               </TableRow>
             ))}
@@ -83,12 +75,12 @@ export default function CityTable({ cities, onEditData, onDeleteData }) {
       </TableContainer>
 
       <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
+        rowsPerPageOptions={[5, 10, 25, 50]}
         component="div"
         count={cities?.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handleChangePage}
+        onPageChange={(event, newPage) => setPage(newPage)}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
